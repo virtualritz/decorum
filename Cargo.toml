@@ -35,16 +35,27 @@ default = [
     "serde",
     "std",
 ]
+## Implements traits from [`approx`](https://crates.io/crates/approx) for `Constrained` types.
+approx = [
+    "dep:approx",
+]
+## Derives `Pod` & `Zeroable` traits from [`bytemuck`](https://crates.io/crates/bytemuck) for `Constrained` types.
+bytemuck = [
+    "dep:bytemuck",
+]
+## Enable support for [`serde`](https://crates.io/crates/serde) for `Constrained` types.
 serde = [
     "dep:serde",
     "dep:serde_derive",
 ]
+## Integrates the `std` library and enables dependent features.
 std = [
     "approx/std",
     "num-traits/std",
     "serde/std",
     "thiserror/std",
 ]
+## Enables features that require an unstable (`nighty`) compiler.
 unstable = []
 
 [dependencies.approx]
@@ -52,6 +63,14 @@ version = "^0.5.0"
 default-features = false
 features = []
 optional = true
+
+[dependencies.bytemuck]
+version = "^1.22"
+features = ["derive"]
+optional = true
+
+[dependencies.document-features]
+version = "0.2"
 
 [dependencies.num-traits]
 version = "^0.2.0"

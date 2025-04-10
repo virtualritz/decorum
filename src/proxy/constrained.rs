@@ -85,6 +85,25 @@ pub struct Constrained<T, C> {
     phantom: PhantomData<fn() -> C>,
 }
 
+#[cfg(feature = "bytemuck")]
+unsafe impl<T, C> bytemuck::Pod for Constrained<T, C>
+where
+    Constrained<T, C>: Copy + Clone,
+    T: bytemuck::Zeroable + 'static,
+    C: 'static,
+{
+}
+
+#[cfg(feature = "bytemuck")]
+unsafe impl<T: bytemuck::Zeroable, C> bytemuck::Zeroable for Constrained<T, C> {
+    fn zeroed() -> Self {
+        Constrained {
+            inner: bytemuck::Zeroable::zeroed(),
+            phantom: PhantomData,
+        }
+    }
+}
+
 impl<T, C> Constrained<T, C> {
     pub(crate) const fn unchecked(inner: T) -> Self {
         Constrained {

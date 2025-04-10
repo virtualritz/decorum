@@ -121,7 +121,9 @@
 //! [`Constraint`]: crate::constraint::Constraint
 //! [`Expression`]: crate::expression::Expression
 //! [`Try`]: core::ops::Try
-
+//!
+//! # Feature flags
+#![doc = document_features::document_features!()]
 #![doc(
     html_favicon_url = "https://raw.githubusercontent.com/olson-sean-k/decorum/master/doc/decorum-favicon.ico"
 )]
